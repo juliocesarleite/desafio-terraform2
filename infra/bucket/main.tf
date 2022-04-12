@@ -7,7 +7,7 @@ data "aws_caller_identity" "current" {}
 
 # Cria o bucket S3
 resource "aws_s3_bucket" "remotestate" {
-  bucket = "tfstate-${data.aws_caller_identity.current.account_id}"
+  bucket = "s3tfstate-${data.aws_caller_identity.current.account_id}"
 
   tags = {
     Name        = "Remote State"
