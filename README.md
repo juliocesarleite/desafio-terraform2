@@ -19,17 +19,17 @@
 9.  :white_check_mark: Criar um Bucket S3 sem acesso a internet para ser repositório do terraform.tfstate
 
 ## <b> Obrigatório! </b> <br>
-    - :white_check_mark: As EC2 devem ser deployadas utilizando "count" através do módulo criado no último desafio
-    - :white_check_mark: As subnets devem ser criadas utilizando "count" ou "for_each". 
-    - :white_check_mark: Necessário ter outputs dos ips privados das 3 EC2 com apache e do ip público da EC2 com nginx
-    - :white_check_mark: Utilizar dynamic block de um item de sua escolha da infraestrutura
-    - :white_check_mark: Rodar tudo no computador pessoal, subir no GIT pessoal e montar uma apresentação final do seu código em funcionamento
+1. :white_check_mark: As EC2 devem ser deployadas utilizando "count" através do módulo criado no último desafio.
+2. :white_check_mark: As subnets devem ser criadas utilizando "count" ou "for_each". 
+3. :white_check_mark: Necessário ter outputs dos ips privados das 3 EC2 com apache e do ip público da EC2 com nginx
+4. :white_check_mark: Utilizar dynamic block de um item de sua escolha da infraestrutura.
+5. :white_check_mark: Rodar tudo no computador pessoal, subir no GIT pessoal e montar uma apresentação final do seu código em funcionamento
 <br>
 
 ## <b> Modo de apresentação: </b> <br>
 - Mostrar o GIT, e rodar o terraform apply e mostrar a infra sendo provisionada na AWS e acessar o ip do balancer, demostrando o funcionamento.
 
-## :newspaper: <span style="color:black"><b> Pré-Requisito: </b> </span>  
+## <b> Pré-Requisito: </b> <br>  
 - :white_check_mark: Ter uma conta na AWS;
 - :white_check_mark: Configurar terraform no PC;
 - :white_check_mark: Ter/Criar uma Chave publica;
@@ -58,7 +58,7 @@
 3.  **Crie seu Bucket S3 que servirá de respositório para o tfstate.**
     - 3.1 *Entre na pasta 'bucket'*
     ```sh
-    cd ...Desafio-2/infra/bucket
+    cd ...desafio-terraform2/infra/bucket
     ```
     - 3.2 *Inicializando o ambiente*
     ```sh
@@ -74,26 +74,24 @@
     ```
     
 4.  **Após a criação do bucket S3, pegue na AWS o nome gerado para utilizar de parametro na alteração do arquivo remote_state.tf. Exemplo:**
-    ```sh
+    ```js
     terraform {
         backend "s3" {
         bucket = "tfstate-97993711039x"
         key    = "state/terraform.tfstate"
         region = "us-east-1"
-  }
-}
+        }
+    }
     ```
 5. **Altere o caminho da sua chave pública  que servirá de modelo para criação do key_pair das EC2.** 
    - *No arquivo /infra/ec2.tf*
-    ```sh
-    #Chave AWS
+    ```js
     resource "aws_key_pair" "my_key" {
         key_name = "aws_key"
         public_key = file(pathexpand("~/.ssh/id_rsa.pub"))
     }
     ```
-
-## :memo: <span style="color:black"><b> Subindo a Infra na AWS </b> </span>    
+## <b> Subindo a Infra na AWS </b> <br>    
 
 
 1.  **Execute a criação dos recursos na pasta '/infra'**
