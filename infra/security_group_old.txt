@@ -1,0 +1,115 @@
+# Security Group a ser utilizado durante a criação da instância NGINX
+resource "aws_security_group" "security_group" {
+  name = "intancia_nginx"
+  description = "Security group for nginx instance"
+  vpc_id = aws_vpc.vpc.id
+  
+  # Habilitando portas de entrada
+  ingress {
+    from_port   = 22 #SSH
+    to_port     = 22 #SSH
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] #Liberando todos os IPs
+  }
+  # Habilitando portas de entrada
+  ingress {
+    from_port   = 80 #HTTP
+    to_port     = 80 #HTTP
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] #Liberando todos os IPs
+  }
+
+  ingress {
+    from_port   = 8080 #NGINX
+    to_port     = 8080 #NGINX
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] #Liberando todos os IPs
+  }
+
+  # Habilitando portas de entrada
+  ingress {
+    from_port   = 0 
+    to_port     = 0 
+    protocol    = "-1"
+    cidr_blocks = ["${aws_vpc.vpc.cidr_block}"] #Liberando todos os IPs
+  }
+  
+  ingress {
+    from_port   = 443 #HTTPS
+    to_port     = 443 #HTTPS
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] #Liberando todos os IPs
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+# Security Group a ser utilizado durante a criação das instâncias com Apache
+resource "aws_security_group" "instancias_sg" {
+  name = "instancias_apache"
+  description = "Security group for apache instance"
+  vpc_id = aws_vpc.vpc.id
+
+  # Habilitando portas de entrada
+  ingress {
+    from_port   = 22 #SSH
+    to_port     = 22 #SSH
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] #Liberando todos os IPs
+  }
+  # Habilitando portas de entrada
+  ingress {
+    from_port   = 80 #HTTP
+    to_port     = 80 #HTTP
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] #Liberando todos os IPs
+  }
+
+  # Habilitando portas de entrada
+  ingress {
+    from_port   = 0 
+    to_port     = 0 
+    protocol    = "-1"
+    cidr_blocks = ["${aws_vpc.vpc.cidr_block}"] #Liberando todos os IPs
+  }
+  
+  ingress {
+    from_port   = 443 #HTTPS
+    to_port     = 443 #HTTPS
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] #Liberando todos os IPs
+  }
+  
+  ingress {
+    from_port   = 3001 #HTTP Servidor Apache 1
+    to_port     = 3001 #HTTP Servidor Apache 1
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] #Liberando todos os IPs
+  }
+  ingress {
+    from_port   = 3002 #HTTP Servidor Apache 1
+    to_port     = 3002 #HTTP Servidor Apache 1
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] #Liberando todos os IPs
+  }
+  ingress {
+    from_port   = 3003 #HTTP Servidor Apache 1
+    to_port     = 3003 #HTTP Servidor Apache 1
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] #Liberando todos os IPs
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+
+
