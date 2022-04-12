@@ -83,14 +83,7 @@
         }
     }
     ```
-5. **Altere o caminho da sua chave pública  que servirá de modelo para criação do key_pair das EC2.** 
-   - *No arquivo /infra/ec2.tf*
-    ```js
-    resource "aws_key_pair" "my_key" {
-        key_name = "aws_key"
-        public_key = file(pathexpand("~/.ssh/id_rsa.pub"))
-    }
-    ```
+
 ## <b> Subindo a Infra na AWS </b> <br>    
 
 
