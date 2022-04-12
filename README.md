@@ -77,7 +77,7 @@
     ```js
     terraform {
         backend "s3" {
-        bucket = "tfstate-97993711039x"
+        bucket = "s3tfstate-979937110395"
         key    = "state/terraform.tfstate"
         region = "us-east-1"
         }
@@ -101,7 +101,7 @@
     ```sh
     terraform apply -auto-approve
     ```
-2. **Por fim, não esquecer de destruir o ambiente, primeiro na pasta 'infra/' e depois na pasta 'infra/bucket'**
+2. **Por fim, não esquecer de destruir o ambiente, primeiro na pasta 'infra/' através do comando abaixo, acessar a aws para limpar o backup S3 na opção "Vazio" e depois na pasta 'infra/bucket' executar o mesmo comando abaixo**
     ```sh
     terraform destroy
     ```
